@@ -10,6 +10,7 @@ import Card from "../../components/Card";
 export default function Accueil(props) {
   return (
     <>
+    {/* Preparation du formulaire d'ajout et de modification modal */}
       <Modal {...props} aria-labelledby="contained-modal-title-vcenter">
         <Modal.Header closeButton>
           <Modal.Title id="contained-modal-title-vcenter">
@@ -47,19 +48,22 @@ export default function Accueil(props) {
       <Container>
         <Row>
           <Col>
+          {/* Title */}
             <p className={styles.titlePage}>
               Bienvenue sur votre espace recette,{" "}
             </p>
-            {/* Title */}
+            
           </Col>
         </Row>
         <Row>
           <Col >
-            <p className={styles.titleUsername}>Username </p>
-            {/* UserName */}
+          {/* UserName */}
+            <p className={styles.titleUsername}>User </p>
+            
           </Col>
         </Row>
         <Row>
+        {/* Préparation des Card pour les listes de recettes */}
           <Col xs="auto" md="auto" lg="auto">
             <Card />
           </Col>
