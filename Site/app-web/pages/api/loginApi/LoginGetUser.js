@@ -3,17 +3,16 @@ import Login from '../../../models/loginModel';
 
 export default async function getLogin(req, res) {
   try {
-    console.log('CONNECTING TO MONGO');
     await connectMongo();
-    console.log('CONNECTED TO MONGO');
-
-    console.log('CREATING DOCUMENT');
-    const login = await Login.find(req.body);
-    console.log('CREATED DOCUMENT');
-
-    res.json({ login });
+    const login = await Login.find(req.query);
+    console.log(login)
+    if (login.length > 0){
+       res.status(200).json({ success: "l'utilisateur a été trouvé !" });
+    } else{
+       res.status(400).json({ error: "oops il y a eu une erreur " });
+    }
   } catch (error) {
     console.log(error);
-    res.json({ error });
+    return error;
   }
 }

@@ -3,49 +3,47 @@ import sha256 from "js-sha256";
 export default class userController {
   /** Handles POST request. */
 
-  async createUserDb(login, password) {
+  static async createUserDb(login, password) {
     let cryptedPassword = sha256(password);
+    const response = await fetch(`/api/loginApi/loginAddUser`, {
+      body: JSON.stringify({ login: login, password: cryptedPassword }),
+      mode: "no-cors",
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      method: "POST",
+    })
 
-    try {
-      const response = await fetch(`/api/loginApi/loginAddUser`, {
-        body: { login: login, password: cryptedPassword },
-        method: "POST",
-      });
-
-      if (response.status >= 400) {
-        return res.status(400).json({
-          error: "There was an error",
-        });
-      }
-
-      return res.status(200).json({ status: "ok" });
-    } catch (error) {
-      return res.status(500).json({
-        error: "There was an error",
-      });
+    if (response.status == 200) {
+      return "ok";
+    } else {
+      return "error";
     }
   }
 
-  async findUserDb(login, password) {
+  static async findUserDb(login, password) {
     let cryptedPassword = sha256(password);
 
-    try {
-      const response = await fetch(`/api/loginApi/loginGetUser`, {
-        body: { login: login, password: cryptedPassword },
+    const response = await fetch(
+      `/api/loginApi/loginGetUser?login=${encodeURIComponent(login)}&password=${encodeURIComponent(cryptedPassword)}`,
+      {
         method: "GET",
-      });
-
-      if (response.status >= 400) {
-        return res.status(400).json({
-          error: "There was an error",
-        });
+        mode: "no-cors",
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
       }
+    )
+    
 
-      return res.status(200).json({ status: "ok" });
-    } catch (error) {
-      return res.status(500).json({
-        error: "There was an error",
-      });
+    if(response.status == 200){
+        return 'ok'
+    }else{
+        return 'error'
     }
   }
 }
