@@ -4,6 +4,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import styles from "../styles/Card.module.css";
 import Image from "next/image";
+import PommeDeTerre from "../public/assets/images/pommes-de-terres.jpg"
 
 export default function Card() {
   return (
@@ -12,7 +13,9 @@ export default function Card() {
         <Col>
           <Image
             className={styles.cardImage}
-            src="/assets/images/pommes-de-terres.jpg"
+            src={PommeDeTerre}
+            layout="responsive"
+            placeholder="blur"
             alt="pommes-de-terre"
             width="350"
             height="200"
@@ -23,14 +26,13 @@ export default function Card() {
         <Col>
           <p
             className={styles.textCard}
-            src="/assets/images/pommes-de-terres.jpg"
           >
             {" "}
             Pommes de terre au four{" "}
           </p>
         </Col>
       </Row>
-      <Row class="h-25 d-flex justify-content-end align-items-end ">
+      <Row className="h-25 d-flex justify-content-end align-items-end ">
         <Col xs="auto" md="auto" lg="auto" className={styles.buttonCard}>
           <a
             onClick={() => {
