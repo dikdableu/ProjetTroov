@@ -2,13 +2,16 @@ import React, {useState, useRef} from "react";
 import styles from "../../styles/Login.module.css";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
 import userController from "../../controllers/userController";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useRouter } from "next/router";
 
 export default function CreateUser() {
 
   const inputLoginRef = useRef();
   const inputPasswordRef = useRef();
+  const router = useRouter();
 
   return (
     <div className={styles.containerParent}>
@@ -73,13 +76,35 @@ export default function CreateUser() {
                       inputPasswordRef.current.value
                     )
                     .then((response) => {
-                      console.log(response);
+                      if (response == "ok") {
+                        toast.success("Vous allez être redirigé !", {
+                          position: "bottom-center",
+                          autoClose: 3000,
+                          hideProgressBar: false,
+                          closeOnClick: true,
+                          pauseOnHover: true,
+                          progress: undefined,
+                        });
+                        setTimeout(() => {
+                            router.push("/Login");
+                        }, 4000)
+                      } else {
+                        toast.error("L'utilisateur n'a pas pu être créé ", {
+                          position: "bottom-center",
+                          autoClose: 3000,
+                          hideProgressBar: false,
+                          closeOnClick: true,
+                          pauseOnHover: true,
+                          progress: undefined,
+                        });
+                      }
                     });
                 }}
               >
                 {" "}
                 Validate{" "}
               </button>
+              <ToastContainer />
             </Row>
           </Row>
         </Row>

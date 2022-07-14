@@ -8,11 +8,15 @@ export default async function addLogin(req, res) {
     await connectMongo();
     console.log('CONNECTED TO MONGO');
     console.log('CREATING DOCUMENT');
-    const login = await Login.create(JSON.parse(req.body));
-    console.log('CREATED DOCUMENT');
-    res.json({ login });
+    await Login.create(JSON.parse(req.body), function (err) {
+        if (!err) {
+          res.status(200).json({ success: "l'utilisateur a été créé !" });
+        } else {
+          res.status(400).json({ error: "oops il y a eu une erreur " });
+        }
+    });
   } catch (error) {
     console.log(error);
-    res.json({ error });
+    return error;
   }
 }
