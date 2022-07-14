@@ -6,11 +6,15 @@ import Col from "react-bootstrap/Col";
 import Modal from "react-bootstrap/Modal";
 import styles from "../../styles/HomePage.module.css";
 import Card from "../../components/Card";
+import { useContext } from "react";
+import {AppContext} from "../../context/context";
 
 export default function Accueil(props) {
+  const { loginName } = useContext(AppContext);
+  console.log(loginName);
   return (
     <>
-    {/* Preparation du formulaire d'ajout et de modification modal */}
+      {/* Preparation du formulaire d'ajout et de modification modal */}
       <Modal {...props} aria-labelledby="contained-modal-title-vcenter">
         <Modal.Header closeButton>
           <Modal.Title id="contained-modal-title-vcenter">
@@ -48,22 +52,20 @@ export default function Accueil(props) {
       <Container>
         <Row>
           <Col>
-          {/* Title */}
+            {/* Title */}
             <p className={styles.titlePage}>
               Bienvenue sur votre espace recette,{" "}
             </p>
-            
           </Col>
         </Row>
         <Row>
-          <Col >
-          {/* UserName */}
-            <p className={styles.titleUsername}>User </p>
-            
+          <Col>
+            {/* UserName */}
+            <p className={styles.titleUsername}>{loginName} </p>
           </Col>
         </Row>
         <Row>
-        {/* Préparation des Card pour les listes de recettes */}
+          {/* Préparation des Card pour les listes de recettes */}
           <Col xs="auto" md="auto" lg="auto">
             <Card />
           </Col>

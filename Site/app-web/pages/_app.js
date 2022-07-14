@@ -1,15 +1,16 @@
 import "../styles/globals.css";
-import "bootstrap/dist/css/bootstrap.css";
-import { useEffect } from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
+import { useState } from "react";
+import  AppProvider  from '../context/context';
 
 function MyApp({ Component, pageProps }) {
 
-  // Importation de bootstrap pour le projet
-  useEffect(() => {
-    import("bootstrap/dist/js/bootstrap");
-  }, []);
 
-  return <Component {...pageProps} />;
+  return (
+    <AppProvider>
+      <Component {...pageProps} />
+    </AppProvider>
+  );
 }
 
 export default MyApp;

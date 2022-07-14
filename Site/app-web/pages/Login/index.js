@@ -1,16 +1,19 @@
-import React, { useRef } from "react";
+import React, { useRef, useContext } from "react";
 import styles from "../../styles/Login.module.css";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import userController from "../../controllers/userController";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { AppContext } from "../../context/context";
 import { useRouter } from "next/router";
 
 export default function Login() {
   const inputLoginRef = useRef();
   const inputPasswordRef = useRef();
   const router = useRouter();
+  const { loginName, setLoginName } = useContext(AppContext);
+  console.log(loginName);
 
   return (
     <div className={styles.containerParent}>
@@ -71,36 +74,39 @@ export default function Login() {
                 className={styles.buttonLogin}
                 id="validate"
                 onClick={() => {
-                  userController.findUserDb(
-                    inputLoginRef.current.value,
-                    inputPasswordRef.current.value
-                  ).then((response) => {
-                    if(response == "ok"){
-                      toast.success("Bienvenue !", {
-                        position: "bottom-center",
-                        autoClose: 3000,
-                        hideProgressBar: false,
-                        closeOnClick: true,
-                        pauseOnHover: true,
-                        progress: undefined,
-                      });
-                      setTimeout(() => {
-                        router.push("/Home");
-                      }, 4000);
-                    }else {
-                      toast.error(
-                        "Oops une error c'est produite, vous êtes vous trompé ?",
-                        {
+                  userController
+                    .findUserDb(
+                      inputLoginRef.current.value,
+                      inputPasswordRef.current.value
+                    )
+                    .then((response) => {
+                      if (response == "ok") {
+                        toast.success("Bienvenue !", {
                           position: "bottom-center",
                           autoClose: 3000,
                           hideProgressBar: false,
                           closeOnClick: true,
                           pauseOnHover: true,
                           progress: undefined,
-                        }
-                      );
-                    }
-                  });
+                        });
+                        setLoginName(inputLoginRef.current.value);
+                        setTimeout(() => {
+                          router.push("/Home");
+                        }, 4000);
+                      } else {
+                        toast.error(
+                          "Oops une error c'est produite, vous êtes vous trompé ?",
+                          {
+                            position: "bottom-center",
+                            autoClose: 3000,
+                            hideProgressBar: false,
+                            closeOnClick: true,
+                            pauseOnHover: true,
+                            progress: undefined,
+                          }
+                        );
+                      }
+                    });
                 }}
               >
                 {" "}
