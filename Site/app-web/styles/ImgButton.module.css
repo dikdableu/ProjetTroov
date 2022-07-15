@@ -1,0 +1,15 @@
+.containerButton {
+    background-color: white;
+    width: 55px;
+    height: 55px;
+    -webkit-border-radius: 100px;
+    -moz-border-radius: 100px;
+    border-radius: 100px;
+    -webkit-box-shadow: 0px 0px 30px 15px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 0px 30px 15px rgba(0, 0, 0, 0.2);
+    border-width: 0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+

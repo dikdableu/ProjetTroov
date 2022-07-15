@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState, useRef} from "react";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Button from "react-bootstrap/Button";
@@ -8,45 +8,54 @@ import styles from "../../styles/HomePage.module.css";
 import Card from "../../components/Card";
 import { useContext } from "react";
 import {AppContext} from "../../context/context";
+import AddButton from "../../components/AddButton";
+import ImgButton from "../../components/imgButton";
 
 export default function Accueil(props) {
   const { loginName } = useContext(AppContext);
   console.log(loginName);
+
+  const [show, setShow] = useState(false);
+  const handleModal = () => {
+    console.log('is clicked')
+    setShow(!show)
+  };
+
+  const inputLoginRef = useRef();
+  const inputPasswordRef = useRef();
+
   return (
     <>
       {/* Preparation du formulaire d'ajout et de modification modal */}
-      <Modal {...props} aria-labelledby="contained-modal-title-vcenter">
+      <Modal show={show} onHide={handleModal}>
         <Modal.Header closeButton>
-          <Modal.Title id="contained-modal-title-vcenter">
-            Using Grid in Modal
-          </Modal.Title>
+          <Modal.Title>Ajouter ou Modifier une recette</Modal.Title>
         </Modal.Header>
-        <Modal.Body className="show-grid">
+        <Modal.Body>
           <Container>
-            <Row>
-              <Col xs={12} md={8}>
-                .col-xs-12 .col-md-8
+            <Row className="justify-content-center align-items-center">
+              <Col>
+                <input
+                  id="title"
+                  type="text"
+                  ref={inputLoginRef}
+                  placeholder="Titre de la recette"
+                  className={styles.inputTitle}
+                />
               </Col>
-              <Col xs={6} md={4}>
-                .col-xs-6 .col-md-4
-              </Col>
-            </Row>
-
-            <Row>
-              <Col xs={6} md={4}>
-                .col-xs-6 .col-md-4
-              </Col>
-              <Col xs={6} md={4}>
-                .col-xs-6 .col-md-4
-              </Col>
-              <Col xs={6} md={4}>
-                .col-xs-6 .col-md-4
+              <Col>
+                <ImgButton />
               </Col>
             </Row>
           </Container>
         </Modal.Body>
         <Modal.Footer>
-          <Button onClick={props.onHide}>Close</Button>
+          <Button variant="secondary" onClick={handleModal}>
+            Close
+          </Button>
+          <Button variant="primary" onClick={handleModal}>
+            Save Changes
+          </Button>
         </Modal.Footer>
       </Modal>
       <Container>
@@ -64,7 +73,7 @@ export default function Accueil(props) {
             <p className={styles.titleUsername}>{loginName} </p>
           </Col>
         </Row>
-        <Row>
+        <Row className="align-items-center">
           {/* Préparation des Card pour les listes de recettes */}
           <Col xs="auto" md="auto" lg="auto">
             <Card />
@@ -77,6 +86,9 @@ export default function Accueil(props) {
           </Col>
           <Col xs="auto" md="auto" lg="auto">
             <Card />
+          </Col>
+          <Col xs="auto" md="auto" lg="auto" onClick={handleModal}>
+            <AddButton />
           </Col>
         </Row>
       </Container>
