@@ -16,13 +16,19 @@ export default function Accueil(props) {
   console.log(loginName);
 
   const [show, setShow] = useState(false);
+  const [imageUpload, setImageUpload] = useState();
+
   const handleModal = () => {
     console.log('is clicked')
     setShow(!show)
   };
 
-  const inputLoginRef = useRef();
-  const inputPasswordRef = useRef();
+  const handleImageUpload = file => {
+    console.log(file)
+    setImageUpload(file)
+  }
+
+  const inputTitleRef = useRef();
 
   return (
     <>
@@ -38,13 +44,13 @@ export default function Accueil(props) {
                 <input
                   id="title"
                   type="text"
-                  ref={inputLoginRef}
+                  ref={inputTitleRef}
                   placeholder="Titre de la recette"
                   className={styles.inputTitle}
                 />
               </Col>
               <Col>
-                <ImgButton />
+                <ImgButton handleImageUpload={handleImageUpload} />
               </Col>
             </Row>
           </Container>
