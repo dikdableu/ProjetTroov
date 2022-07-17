@@ -4,10 +4,11 @@ const receiptsSchema = new Schema({
   Title: {
     type: String,
     required: true,
+    unique: true,
   },
   Img: {
     data: Buffer,
-    contentType: String,
+    type: String,
     required: true,
   },
 });

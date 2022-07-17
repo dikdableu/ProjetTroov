@@ -7,6 +7,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { AppContext } from "../../context/context";
 import { useRouter } from "next/router";
+import Link from 'next/link'
 
 export default function Login() {
   const inputLoginRef = useRef();
@@ -45,7 +46,6 @@ export default function Login() {
                 placeholder="Login"
                 className={styles.containerLogin}
               />
-              
             </Row>
           </Row>
           <Row className="justify-content-center align-items-center">
@@ -70,6 +70,18 @@ export default function Login() {
               md="auto"
               lg="auto"
               className="justify-content-center align-items-center"
+            >
+              <Link href="/CreateUser">
+                <a className={styles.lien}> Créer un compte </a>
+              </Link>
+            </Row>
+          </Row>
+          <Row className="justify-content-center align-items-center">
+            <Row
+              xs="auto"
+              md="auto"
+              lg="auto"
+              className="justify-content-center align-items-end"
             >
               <button
                 className={styles.buttonLogin}
@@ -96,7 +108,7 @@ export default function Login() {
                         }, 4000);
                       } else {
                         toast.error(
-                          "Oops une error c'est produite, vous êtes vous trompé ?",
+                          "Oops une erreur s'est produite, vous êtes vous trompé ?",
                           {
                             position: "bottom-center",
                             autoClose: 3000,

@@ -4,19 +4,17 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import styles from "../styles/Card.module.css";
 import Image from "next/image";
-import PommeDeTerre from "../public/assets/images/pommes-de-terres.jpg"
 
-export default function Card() {
+export default function Card({ item, modifyButton, deleteButton }) {
   return (
     <Container className={styles.cardBackground}>
       <Row>
         <Col>
           <Image
             className={styles.cardImage}
-            src={PommeDeTerre}
+            src={item.Img}
             layout="responsive"
-            placeholder="blur"
-            alt="pommes-de-terre"
+            alt={item.Title}
             width="350"
             height="200"
           />
@@ -24,19 +22,14 @@ export default function Card() {
       </Row>
       <Row>
         <Col>
-          <p
-            className={styles.textCard}
-          >
-            {" "}
-            Pommes de terre au four{" "}
-          </p>
+          <p className={styles.textCard}> {item.Title} </p>
         </Col>
       </Row>
       <Row className="h-25 d-flex justify-content-end align-items-end ">
         <Col xs="auto" md="auto" lg="auto" className={styles.buttonCard}>
           <a
             onClick={() => {
-              console.log("click edit");
+              modifyButton(item.Title, item.Img, item._id);
             }}
           >
             <Image
@@ -49,11 +42,7 @@ export default function Card() {
           </a>
         </Col>
         <Col xs="auto" md="auto" lg="auto">
-          <a
-            onClick={() => {
-              console.log("click clear");
-            }}
-          >
+          <a onClick={() => deleteButton(item._id)}>
             <Image
               //   className={styles.cardImage}
               src="/assets/icones/clear.png"

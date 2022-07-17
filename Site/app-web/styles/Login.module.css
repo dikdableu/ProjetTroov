@@ -38,7 +38,7 @@
 
 
 .buttonLogin {
-    margin-top: 40px;
+  margin-top: 40px;
   -webkit-border-radius: 50px;
   -moz-border-radius: 50px;
   border-radius: 50px;
@@ -59,4 +59,12 @@
     font-weight: 700;
     font-size: 36px;
     margin-bottom: 40px;
+}
+
+.lien {
+    color: black;
+    font-family: "Roboto";
+    font-weight: 400;
+    font-size: 18px;
+    margin-top: 40px;
 }

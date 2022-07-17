@@ -1,8 +1,6 @@
 export default class receiptsController {
-  /** Handles POST request. */
-
   static async createReceiptsDb(title, img) {
-    const response = await fetch(`/api/loginApi/receiptsAdd`, {
+    const response = await fetch(`/api/receiptsApi/receiptsAdd`, {
       body: JSON.stringify({ Title: title, Img: img }),
       mode: "no-cors",
       headers: {
@@ -11,62 +9,105 @@ export default class receiptsController {
         Accept: "application/json",
       },
       method: "POST",
-    });
-
-    if (response.status == 200) {
-      return "ok";
-    } else {
-      return "error";
-    }
+    })
+      .then((response) => {
+        if (response.status == 200) {
+          return response.json();
+        } else {
+          return "error";
+        }
+      })
+      .then((result) => {
+        if (result.success) {
+          return { text: "ok", data: result.data };
+        } else {
+          return "error";
+        }
+      });
+    return response;
   }
 
-  //   static async findReceiptsDb(login, password) {
-  //     let cryptedPassword = sha256(password);
+  static async getReceiptsDb() {
+    const result = await fetch(`/api/receiptsApi/receiptsGet`, {
+      method: "GET",
+      mode: "no-cors",
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+    })
+      .then((response) => {
+        if (response.status == 200) {
+          return response.json();
+        } else {
+          return "error";
+        }
+      })
+      .then((result) => {
+        if (result.success == "l'utilisateur a été trouvé !") {
+          return { text: "ok", data: result.data };
+        } else {
+          return "error";
+        }
+      });
+    return result;
+  }
 
-  //     const response = await fetch(
-  //       `/api/loginApi/loginGetUser?login=${encodeURIComponent(
-  //         login
-  //       )}&password=${encodeURIComponent(cryptedPassword)}`,
-  //       {
-  //         method: "GET",
-  //         mode: "no-cors",
-  //         headers: {
-  //           "Access-Control-Allow-Origin": "*",
-  //           "Content-Type": "application/json",
-  //           Accept: "application/json",
-  //         },
-  //       }
-  //     );
+  static async updateReceiptsDb(title, img, id) {
+    const response = await fetch(`/api/receiptsApi/receiptsUpdate`, {
+      body: JSON.stringify({ Title: title, Img: img, id: id }),
+      method: "POST",
+      mode: "no-cors",
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+    })
+      .then((response) => {
+        if (response.status == 200) {
+          console.log("ici");
+          return response.json();
+        } else {
+          return "error";
+        }
+      })
+      .then((result) => {
+        if (result.success) {
+          return { text: "ok", data: result.data };
+        } else {
+          return "error";
+        }
+      });
+    return response;
+  }
 
-  //     if (response.status == 200) {
-  //       return "ok";
-  //     } else {
-  //       return "error";
-  //     }
-  //   }
-
-  //   static async updateReceiptsDb(login, password) {
-  //     let cryptedPassword = sha256(password);
-
-  //     const response = await fetch(
-  //       `/api/loginApi/loginGetUser?login=${encodeURIComponent(
-  //         login
-  //       )}&password=${encodeURIComponent(cryptedPassword)}`,
-  //       {
-  //         method: "GET",
-  //         mode: "no-cors",
-  //         headers: {
-  //           "Access-Control-Allow-Origin": "*",
-  //           "Content-Type": "application/json",
-  //           Accept: "application/json",
-  //         },
-  //       }
-  //     );
-
-  //     if (response.status == 200) {
-  //       return "ok";
-  //     } else {
-  //       return "error";
-  //     }
-  //   }
+  static async deleteReceiptsDb(idCard) {
+    const response = await fetch(`/api/receiptsApi/receiptsDelete`, {
+      body: JSON.stringify({ id: idCard }),
+      method: "POST",
+      mode: "no-cors",
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+    })
+      .then((response) => {
+        if (response.status == 200) {
+          return response.json();
+        } else {
+          return "error";
+        }
+      })
+      .then((result) => {
+        if (result.success) {
+          return { text: "ok", data: result.data };
+        } else {
+          return "error";
+        }
+      });
+    return response;
+  }
 }

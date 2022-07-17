@@ -5,15 +5,12 @@ import Image from "next/image";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 
-export default function ImgButton({ handleImageUpload }) {
-  const [nameFile, setNameFile] = useState("");
-
+export default function ImgButton({ handleImageUpload, handleNameFile, nameFile }) {
   const inputFileRef = useRef();
 
   const handleFileUpload = (event) => {
     const [file] = event.target.files;
-    console.log(file);
-    setNameFile(file.name);
+    handleNameFile(file.name);
     handleImageUpload(file);
   };
 
