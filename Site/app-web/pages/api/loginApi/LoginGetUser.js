@@ -5,7 +5,6 @@ export default async function getLogin(req, res) {
   try {
     await connectMongo();
     const login = await Login.find(req.query);
-    console.log(login)
     if (login.length > 0){
        res.status(200).json({ success: "l'utilisateur a été trouvé !" });
     } else{

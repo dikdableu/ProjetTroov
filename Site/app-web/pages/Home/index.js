@@ -93,7 +93,6 @@ export default function Accueil(props) {
 
   // Fonction de soumission du formulaire d'ajouts/Modifications des recettes
   const handleSubmit = async () => {
-    console.log(isModify);
     if (isModify) {
       await receiptsController
         .updateReceiptsDb(inputTitleRef.current.value, imageUpload, idCard)
@@ -215,7 +214,7 @@ export default function Accueil(props) {
             {listReceipts &&
               listReceipts.map((item) => {
                 return (
-                  <Col xs="auto" md="auto" lg="auto">
+                  <Col xs="auto" md="auto" lg="auto" key={item._id}>
                     <Card
                       item={item}
                       modifyButton={handleModify}

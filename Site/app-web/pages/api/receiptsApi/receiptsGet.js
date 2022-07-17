@@ -5,7 +5,6 @@ export default async function getReceipts(req, res) {
   try {
     await connectMongo();
     const receiptsApi = await Receipts.find();
-    console.log(receiptsApi);
     if (receiptsApi.length > 0) {
       res
         .status(200)

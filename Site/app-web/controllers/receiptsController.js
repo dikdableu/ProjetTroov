@@ -70,7 +70,6 @@ export default class receiptsController {
     })
       .then((response) => {
         if (response.status == 200) {
-          console.log("ici");
           return response.json();
         } else {
           return "error";

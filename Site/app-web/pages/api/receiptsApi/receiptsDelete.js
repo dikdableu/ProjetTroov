@@ -8,7 +8,6 @@ export default async function deleteReceipts(req, res) {
     await Receipts.findByIdAndRemove(
       { _id: body.id },
       async function (err, result) {
-        console.log(err);
         if (err) {
           res.status(400).json({ error: "oops il y a eu une erreur " });
         } else {
