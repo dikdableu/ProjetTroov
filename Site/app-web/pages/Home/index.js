@@ -19,7 +19,7 @@ export default function Accueil(props) {
   const { loginName } = useContext(AppContext);
 
   const [show, setShow] = useState(false);
-  const [idCard, setIdCard]= useState();
+  const [idCard, setIdCard] = useState();
   const [isModify, setIsModify] = useState(false);
   const [isDelete, setIsDelete] = useState(false);
   const [listReceipts, setListReceipts] = useState();
@@ -44,16 +44,16 @@ export default function Accueil(props) {
   const handleModify = (title, img, _id) => {
     setIsModify(true);
     handleNameFile(title);
-    setIdCard(_id)
+    setIdCard(_id);
     inputTitleRef.current = title;
     setImageUpload(img);
     handleModal();
   };
 
   const handleDelete = (_id) => {
-     receiptsController.deleteReceiptsDb(_id).then((result) => {
-       setListReceipts(result.data);
-     });
+    receiptsController.deleteReceiptsDb(_id).then((result) => {
+      setListReceipts(result.data);
+    });
   };
 
   const handleModal = () => {
@@ -77,7 +77,7 @@ export default function Accueil(props) {
   };
 
   const handleNameFile = (nameFile) => {
-      setNameFile(nameFile);
+    setNameFile(nameFile);
   };
 
   const handleSubmit = async () => {
@@ -101,17 +101,14 @@ export default function Accueil(props) {
               setIsModify(false);
             }, 4000);
           } else {
-            toast.error(
-              "Oops une erreur s'est produite :(",
-              {
-                position: "bottom-center",
-                autoClose: 3000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                progress: undefined,
-              }
-            );
+            toast.error("Oops une erreur s'est produite :(", {
+              position: "bottom-center",
+              autoClose: 3000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              progress: undefined,
+            });
           }
         });
     } else {
@@ -120,7 +117,7 @@ export default function Accueil(props) {
         .then((response) => {
           if (response.text == "ok") {
             setListReceipts(response.data);
-            setShow(!show)
+            setShow(!show);
             toast.success("La recette à bien été ajouté !", {
               position: "bottom-center",
               autoClose: 3000,
@@ -228,10 +225,15 @@ export default function Accueil(props) {
             <Col xs="auto" md="auto" lg="auto">
               <Card />
             </Col> */}
-            <Col xs="auto" md="auto" lg="auto" onClick={() =>{
-              setIsModify(false);
-               setShow(!show)
-            }}>
+            <Col
+              xs="auto"
+              md="auto"
+              lg="auto"
+              onClick={() => {
+                setIsModify(false);
+                setShow(!show);
+              }}
+            >
               <AddButton />
             </Col>
           </Row>

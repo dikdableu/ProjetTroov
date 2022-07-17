@@ -4,7 +4,7 @@ import Receipts from "../../../models/receiptsModel";
 export default async function deleteReceipts(req, res) {
   try {
     await connectMongo();
-    const body = JSON.parse(req.body)
+    const body = JSON.parse(req.body);
     await Receipts.findByIdAndRemove(
       { _id: body.id },
       async function (err, result) {

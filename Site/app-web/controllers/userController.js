@@ -14,7 +14,7 @@ export default class userController {
         Accept: "application/json",
       },
       method: "POST",
-    })
+    });
 
     if (response.status == 200) {
       return "ok";
@@ -27,7 +27,9 @@ export default class userController {
     let cryptedPassword = sha256(password);
 
     const response = await fetch(
-      `/api/loginApi/loginGetUser?login=${encodeURIComponent(login)}&password=${encodeURIComponent(cryptedPassword)}`,
+      `/api/loginApi/loginGetUser?login=${encodeURIComponent(
+        login
+      )}&password=${encodeURIComponent(cryptedPassword)}`,
       {
         method: "GET",
         mode: "no-cors",
@@ -37,13 +39,12 @@ export default class userController {
           Accept: "application/json",
         },
       }
-    )
-    
+    );
 
-    if(response.status == 200){
-        return 'ok'
-    }else{
-        return 'error'
+    if (response.status == 200) {
+      return "ok";
+    } else {
+      return "error";
     }
   }
 }
