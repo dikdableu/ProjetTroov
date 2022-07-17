@@ -3,6 +3,8 @@ import Receipts from "../../../models/receiptsModel";
 
 export default async function addReceipts(req, res) {
   try {
+
+    //Connexion à mongoDB
     console.log("CONNECTING TO MONGO");
     await connectMongo();
     console.log("CONNECTED TO MONGO");

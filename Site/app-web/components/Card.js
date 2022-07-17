@@ -33,7 +33,6 @@ export default function Card({ item, modifyButton, deleteButton }) {
             }}
           >
             <Image
-              //   className={styles.cardImage}
               src="/assets/icones/editer.png"
               alt="modify"
               width="28"
@@ -44,7 +43,6 @@ export default function Card({ item, modifyButton, deleteButton }) {
         <Col xs="auto" md="auto" lg="auto">
           <a onClick={() => deleteButton(item._id)}>
             <Image
-              //   className={styles.cardImage}
               src="/assets/icones/clear.png"
               alt="modify"
               width="28"

@@ -14,7 +14,6 @@ export default function Login() {
   const inputPasswordRef = useRef();
   const router = useRouter();
   const { loginName, setLoginName } = useContext(AppContext);
-  console.log(loginName);
 
   return (
     <div className={styles.containerParent}>

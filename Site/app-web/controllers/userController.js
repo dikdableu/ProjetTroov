@@ -3,6 +3,7 @@ import sha256 from "js-sha256";
 export default class userController {
   /** Handles POST request. */
 
+  // Fonction de création d'un utilisateur en Base
   static async createUserDb(login, password) {
     let cryptedPassword = sha256(password);
     const response = await fetch(`/api/loginApi/loginAddUser`, {
@@ -23,6 +24,7 @@ export default class userController {
     }
   }
 
+  // Fonction pour trouver un utilisateur en Base
   static async findUserDb(login, password) {
     let cryptedPassword = sha256(password);
 

@@ -1,4 +1,5 @@
 export default class receiptsController {
+  // Fonction de création d'une recette en base
   static async createReceiptsDb(title, img) {
     const response = await fetch(`/api/receiptsApi/receiptsAdd`, {
       body: JSON.stringify({ Title: title, Img: img }),
@@ -27,6 +28,7 @@ export default class receiptsController {
     return response;
   }
 
+  // Fonction de récupération d'une recette en base
   static async getReceiptsDb() {
     const result = await fetch(`/api/receiptsApi/receiptsGet`, {
       method: "GET",
@@ -54,6 +56,7 @@ export default class receiptsController {
     return result;
   }
 
+  // Fonction de modification d'une recette en base
   static async updateReceiptsDb(title, img, id) {
     const response = await fetch(`/api/receiptsApi/receiptsUpdate`, {
       body: JSON.stringify({ Title: title, Img: img, id: id }),
@@ -83,6 +86,7 @@ export default class receiptsController {
     return response;
   }
 
+  // Fonction de suppression d'une recette en base
   static async deleteReceiptsDb(idCard) {
     const response = await fetch(`/api/receiptsApi/receiptsDelete`, {
       body: JSON.stringify({ id: idCard }),

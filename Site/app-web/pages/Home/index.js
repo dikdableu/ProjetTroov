@@ -16,31 +16,37 @@ import "react-toastify/dist/ReactToastify.css";
 import { useRouter } from "next/router";
 
 export default function Accueil(props) {
+
+  //Context de notre application, pour afficher le nom d'utilisateur dans la page d'accueil
   const { loginName } = useContext(AppContext);
 
+  // Ensemble des State
   const [show, setShow] = useState(false);
   const [idCard, setIdCard] = useState();
   const [isModify, setIsModify] = useState(false);
-  const [isDelete, setIsDelete] = useState(false);
   const [listReceipts, setListReceipts] = useState();
   const [imageUpload, setImageUpload] = useState();
   const [nameFile, setNameFile] = useState("");
   const router = useRouter();
 
+
+  // Permet que le point d'entrée de notre application soit la page de login
   useEffect(() => {
     if (loginName == "") {
       router.push("/Login");
     }
   }, []);
 
+
+  // Récupère, à l'initialisation de la page la liste des recettes stockées en base
   useEffect(() => {
     receiptsController.getReceiptsDb().then((result) => {
       setListReceipts(result.data);
     });
   }, []);
 
-  //TODO: convert buffer to object to get name image
 
+  // Permet de faire la différentiation du modal en fonction de si c'est un ajout ou une modification
   const handleModify = (title, img, _id) => {
     setIsModify(true);
     handleNameFile(title);
@@ -50,16 +56,20 @@ export default function Accueil(props) {
     handleModal();
   };
 
+  // Permet la suppresion d'une recette
   const handleDelete = (_id) => {
     receiptsController.deleteReceiptsDb(_id).then((result) => {
       setListReceipts(result.data);
     });
   };
 
+
+  // Affiche ou cache le modal
   const handleModal = () => {
     setShow(!show);
   };
 
+  // Permet la conversion d'une image en ArrayBuffer pour la stocker en base
   const handleImageUpload = (file) => {
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
@@ -76,10 +86,12 @@ export default function Accueil(props) {
     });
   };
 
+  // Permet de récupérer le nom de l'image
   const handleNameFile = (nameFile) => {
     setNameFile(nameFile);
   };
 
+  // Fonction de soumission du formulaire d'ajouts/Modifications des recettes
   const handleSubmit = async () => {
     console.log(isModify);
     if (isModify) {
@@ -147,7 +159,6 @@ export default function Accueil(props) {
 
   return (
     <>
-      {/* Preparation du formulaire d'ajout et de modification modal */}
       <Modal show={show} onHide={handleModal}>
         <Modal.Header closeButton>
           <Modal.Title>Ajouter ou Modifier une recette</Modal.Title>
